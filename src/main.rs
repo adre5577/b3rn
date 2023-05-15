@@ -40,6 +40,13 @@ fn main() {
             new_name += extension.to_str().expect("Non-unicode filename.");
         }
 
+        if let Ok(exists) = Path::new(&new_name).try_exists(){
+            if exists {
+                println!("File already exists!");
+                continue;
+            }
+        }
+
         match fs::rename(filename, new_name) {
             Ok(_) => {},
             Err(err) => println!("Error renaming {filename}: {err}")
