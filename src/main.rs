@@ -42,7 +42,7 @@ fn main() {
 
         if let Ok(exists) = Path::new(&new_name).try_exists(){
             if exists {
-                println!("File already exists!");
+                println!("File {new_name} already exists!");
                 continue;
             }
         }
