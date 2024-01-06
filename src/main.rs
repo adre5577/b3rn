@@ -30,14 +30,15 @@ fn main() {
         hasher.update(&filedata);
         let mut output = hasher.finalize_xof();
 
-        let mut bName = vec![0; bytes];
-        output.fill(&mut bName);
+        let mut bytes_name = vec![0; bytes];
+        output.fill(&mut bytes_name);
 
-        let mut new_name = String::new();
-        for byte in bName {
-            new_name += WORDS[byte as usize];
+        let mut vec_name: Vec<&str> = Vec::new();
+        for byte in bytes_name {
+            vec_name.push(WORDS[byte as usize]);
         }
     
+        let mut new_name = vec_name.join("_");
         if let Some(extension) = Path::new(filename).extension() {
             new_name += ".";
             new_name += extension.to_str().expect("Non-unicode filename.");
