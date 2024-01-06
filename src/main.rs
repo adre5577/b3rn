@@ -2,6 +2,9 @@ use std;
 use std::fs;
 use std::env;
 use std::path::Path;
+
+use b3rn::WORDS;
+
 use blake3;
 
 fn main() {
@@ -10,7 +13,7 @@ fn main() {
         println!("Usage: b3rn [number of bytes] [files]");
     }
 
-    args.next(); // get rid of the filename
+    args.next(); // get rid of the executable filename
 
     let bytes = args.next().unwrap().parse::<usize>().expect("A number must be provided.");
     for fnstring in args {
@@ -32,7 +35,7 @@ fn main() {
 
         let mut new_name = String::new();
         for byte in bName {
-            new_name += &format!("{:02x}", byte);
+            new_name += WORDS[byte as usize];
         }
     
         if let Some(extension) = Path::new(filename).extension() {
