@@ -2,6 +2,7 @@ use std;
 use std::fs;
 use std::env;
 use std::path::Path;
+use std::process::exit;
 
 use b3rn::WORDS;
 
@@ -27,6 +28,7 @@ fn main() {
     let mut args = env::args();
     if args.len() < 3 {
         println!("Usage: b3rn [number of bytes] [files]");
+        exit(1);
     }
 
     args.next(); // get rid of the executable filename
